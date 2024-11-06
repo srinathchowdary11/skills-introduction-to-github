@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.example.org/bpmn"
+             id="Definitions_1"
+             targetNamespace="http://www.example.org/bpmn"
+             exporter="Camunda Modeler" exporterVersion="4.7.0">
+
+    <process id="AsIsCheckDepositProcess" isExecutable="false">
+        <laneSet id="LaneSet_1">
+            <lane id="Lane_User" name="User"/>
+            <lane id="Lane_Bank" name="Bank"/>
+        </laneSet>
+        <startEvent id="StartEvent_User" name="User Initiates Deposit"/>
+        <task id="Task_VisitBranch" name="Visit Bank Branch/ATM"/>
+        <task id="Task_ManualEntry" name="Manually Enter Check Details"/>
+        <task id="Task_ReviewDeposit" name="Bank Reviews Deposit"/>
+        <endEvent id="EndEvent_Completed" name="Deposit Completed"/>
+
+        <sequenceFlow id="Flow_1" sourceRef="StartEvent_User" targetRef="Task_VisitBranch"/>
+        <sequenceFlow id="Flow_2" sourceRef="Task_VisitBranch" targetRef="Task_ManualEntry"/>
+        <sequenceFlow id="Flow_3" sourceRef="Task_ManualEntry" targetRef="Task_ReviewDeposit"/>
+        <sequenceFlow id="Flow_4" sourceRef="Task_ReviewDeposit" targetRef="EndEvent_Completed"/>
+    </process>
+
+    <process id="ToBeCheckDepositProcess" isExecutable="false">
+        <laneSet id="LaneSet_2">
+            <lane id="Lane_User" name="User"/>
+            <lane id="Lane_System" name="System"/>
+        </laneSet>
+        <startEvent id="StartEvent_User_ToBe" name="User Initiates Remote Deposit"/>
+        <task id="Task_CaptureCheck" name="Capture Check Images"/>
+        <task id="Task_OCRDataExtraction" name="OCR Data Extraction"/>
+        <task id="Task_ReviewData" name="User Reviews Data"/>
+        <task id="Task_RealTimeFeedback" name="Provide Real-Time Feedback"/>
+        <endEvent id="EndEvent_Completed_ToBe" name="Deposit Completed"/>
+
+        <sequenceFlow id="Flow_5" sourceRef="StartEvent_User_ToBe" targetRef="Task_CaptureCheck"/>
+        <sequenceFlow id="Flow_6" sourceRef="Task_CaptureCheck" targetRef="Task_OCRDataExtraction"/>
+        <sequenceFlow id="Flow_7" sourceRef="Task_OCRDataExtraction" targetRef="Task_ReviewData"/>
+        <sequenceFlow id="Flow_8" sourceRef="Task_ReviewData" targetRef="Task_RealTimeFeedback"/>
+        <sequenceFlow id="Flow_9" sourceRef="Task_RealTimeFeedback" targetRef="EndEvent_Completed_ToBe"/>
+    </process>
+
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="AsIsCheckDepositProcess">
+            <bpmndi:BPMNShape id="StartEvent_User_di" bpmnElement="StartEvent_User">
+                <dc:Bounds x="100" y="100" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Task_VisitBranch_di" bpmnElement="Task_VisitBranch">
+                <dc:Bounds x="150" y="100" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Task_ManualEntry_di" bpmnElement="Task_ManualEntry">
+                <dc:Bounds x="300" y="100" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Task_ReviewDeposit_di
